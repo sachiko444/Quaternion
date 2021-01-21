@@ -17,6 +17,7 @@
  *                                                                        *
  **************************************************************************/
 
+#include <iostream>
 #include <QtWidgets/QApplication>
 #include <QtCore/QTranslator>
 #include <QtCore/QLibraryInfo>
@@ -62,13 +63,14 @@ void loadTranslations(
 
 int main( int argc, char* argv[] )
 {
+    std::cout << "hola mundo \n";
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 #endif
 
     QApplication::setOrganizationName(QStringLiteral("Quotient"));
     QApplication::setApplicationName(QStringLiteral("quaternion"));
-    QApplication::setApplicationDisplayName(QStringLiteral("Quaternion"));
+    QApplication::setApplicationDisplayName(QStringLiteral("Quaternion - Informatica"));
     QApplication::setApplicationVersion(QStringLiteral("0.0.9.4+git"));
     QApplication::setDesktopFileName(
         QStringLiteral("com.github.quaternion.desktop"));
