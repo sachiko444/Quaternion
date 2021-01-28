@@ -17,6 +17,7 @@
  *                                                                        *
  **************************************************************************/
 
+ 
 #include <iostream>
 #include <QtWidgets/QApplication>
 #include <QtCore/QTranslator>
@@ -186,12 +187,20 @@ int main( int argc, char* argv[] )
         window.enableDebug();
     }
 
+    char seleccion = '\0';
+
+
+    while(seleccion != 'n' && seleccion != 'v') {
+        std::cout << "Desea que la aplicacion empieze [v]isible o [n]o visible?\n";
+        std::cin >> seleccion;
+    }
+
     ActivityDetector ad(app, window); Q_UNUSED(ad);
-    if (parser.isSet(hideMainWindow)) {
+    if (seleccion == 'n') { //(parser.isSet(hideMainWindow)) {
         qDebug() << "--- Hide time!";
         window.hide();
     }
-    else {
+    else if (seleccion == 'v') {
         qDebug() << "--- Show time!";
         window.show();
     }
