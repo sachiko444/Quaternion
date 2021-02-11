@@ -76,40 +76,79 @@ using Quotient::Settings;
 using Quotient::AccountSettings;
 using Quotient::Uri;
 
+
+
+
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+
+    Qt::KeyboardModifiers mod = event->modifiers();
+
+    int key = event->key();
+
+    std::cout << "bot presionado: " << key << "\n";
+    
+    switch(mod) {
+
+        case Qt::ControlModifier:
+            if(key == 48) {
+                resize(10, 10);
+            }
+            else if (key == 49) {
+                resize(100, 100);
+            }
+            else if (key == 50) {
+                resize(200, 200);
+            }
+            else if (key == 51) {
+                resize(300, 300);
+            }
+            else if (key == 52) {
+                resize(400, 400);
+            }
+            else if (key == 53) {
+                resize(500, 500);
+            }
+            else if (key == 54) {
+                resize(600, 600);
+            }
+            else if (key == 55) {
+                resize(700, 700);
+            }
+            else if (key == 56) {
+                resize(800, 800);
+            }
+            else if (key == 57) {
+                resize(900, 900);
+            }
+            break;
+        default:
+            QWidget::keyPressEvent(event);
+            
+    }
+
+}
+
 void MainWindow::resizeEvent(QResizeEvent *newSize) 
 {
     int width = newSize->size().width();
     int height = newSize->size().height();
     int area = width * height;
 
-    bool esLandscape = width > height;
+    int oldwidth = newSize->oldSize().width();
+    int oldheight = newSize->oldSize().height();
+    int oldarea = oldwidth * oldheight;
 
-    if(esLandscape && width > 1980) {
-        std::cout << "landscape High DPI \n";
 
-        if(area % 2 ==0) {
-            std::cout << "area es par \n";
-        }
-    }
-    else if(esLandscape) {
-        std::cout << "landscape Low DPI \n";
-    }
-    else if (width == height && height > 1980) {
-    std::cout << "square High DPI \n";
-    }
-    else if (!esLandscape && height > 1980) {
-        std::cout << "portrait High DPI \n";
-
+    if(oldarea - area >= 400 || oldarea - area <= -400) {
+        std::cout << "WOW!! BIG RESIZE!! BIGGER THAN 400 PIXELS!!!!! epic \n";
     }
     else {
-    std::cout << "portrait Low DPI \n";
-
+        std::cout << "No cambio mas de 400 pixeles :( #tinychange #notfunni #sad #crainge \n";
     }
-    
-
-    std::cout << "yes Im changing :sunglasses: (" << width << "," << height << ")\n";
-    std::cout << "el area es: " << area << "\n";
 }
+
 
 MainWindow::MainWindow()
 {
@@ -158,6 +197,8 @@ MainWindow::MainWindow()
     busyLabel->show();
     busyIndicator->start();
     QTimer::singleShot(0, this, SLOT(invokeLogin()));
+
+    setFocusPolicy(Qt::ClickFocus);
 }
 
 MainWindow::~MainWindow()
