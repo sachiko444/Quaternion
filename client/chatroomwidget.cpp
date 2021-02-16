@@ -667,7 +667,23 @@ void ChatRoomWidget::sendInput()
             delete[] eltexto;
         }
 
+    std::string miTexto2 = m_chatEdit->toPlainText().toStdString();
+
+    size_t qq = miTexto2.size();
+    char* copiaFor = new char[qq + 1];
     
+
+    for(copiaFor[qq] = '\0'; qq > 0; qq--) { 
+
+
+        char aw = qq - 1;
+        copiaFor[aw] = miTexto2[aw];
+        char wd = miTexto2[aw];
+        std::cout << "se esta copiando: " << wd << "\n";
+    }
+
+    std::cout << "El resultado es: " << copiaFor << "\n";
+    delete[] copiaFor;
 
 
 
