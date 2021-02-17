@@ -649,8 +649,16 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
 void ChatRoomWidget::sendInput()
 {
 
+// orientado a objetos
+
+    _mensajes_enviados++;
+    std::cout << "Mensajes enviados: " << _mensajes_enviados << "\n";
+
+
+
     std::string miTexto = m_chatEdit->toPlainText().toStdString();
 
+//copiar un texto
     size_t qq = miTexto.size();
     char* copia = new char[qq + 1];
     copia[qq] = '\0';
@@ -672,6 +680,8 @@ void ChatRoomWidget::sendInput()
         i++;
     }
 
+
+//copiar con (for) un texto
     std::cout << "El resultado es: " << copia << "\n";
     delete[] copia;
 
@@ -687,6 +697,24 @@ void ChatRoomWidget::sendInput()
     std::cout << "El resultado es: " << copiaFor << "\n";
     delete[] copiaFor;
 
+
+//veces que se repite la letra a
+    int vecesLetraA = 0;
+
+    for(int i = qq - 1 ; i >= 0; i--) {
+
+        char actual = miTexto[i];
+        if(actual == 'a' || actual == 'A') {
+            vecesLetraA++;
+        }
+    }
+
+    std::cout << "Veces letra 'a': " << vecesLetraA << "\n";
+
+
+
+
+//arrays
     std::string misStrings[12];
     misStrings[0] = "hola hola";
 
