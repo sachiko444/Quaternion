@@ -650,6 +650,8 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
 void ChatRoomWidget::sendInput()
 {
 
+
+//LETRA POR LETRA Y POSICION
     std::string miTexto = m_chatEdit->toPlainText().toStdString();
 
     size_t len = miTexto.size();
@@ -667,23 +669,25 @@ void ChatRoomWidget::sendInput()
             delete[] eltexto;
         }
 
+//INVERTIR UN TEXTO
     std::string miTexto2 = m_chatEdit->toPlainText().toStdString();
 
-    size_t qq = miTexto2.size();
-    char* copiaFor = new char[qq + 1];
+    size_t leng = miTexto2.size();
+    char* sentence = new char[leng + 1];
+    sentence[leng] = '\0';
+    int size = leng - 1;
+
+    for(int i = leng-1; i >= 0; i--) { 
+
+
+        sentence[i] = miTexto2[size -i];
+        //char wd = miTexto2[size - i];
+        //std::cout << "se esta copiando: " << wd << "\n";
+    }
     
 
-    for(copiaFor[qq] = '\0'; qq > 0; qq--) { 
-
-
-        char aw = qq - 1;
-        copiaFor[aw] = miTexto2[aw];
-        char wd = miTexto2[aw];
-        std::cout << "se esta copiando: " << wd << "\n";
-    }
-
-    std::cout << "El resultado es: " << copiaFor << "\n";
-    delete[] copiaFor;
+    std::cout << "invertido: " << sentence << "\n";
+    delete[] sentence;
 
 
 
