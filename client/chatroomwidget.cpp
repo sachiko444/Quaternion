@@ -649,88 +649,108 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
 void ChatRoomWidget::sendInput()
 {
 
-// orientado a objetos
-
-    _mensajes_enviados++;
-    std::cout << "Mensajes enviados: " << _mensajes_enviados << "\n";
-
-
-
     std::string miTexto = m_chatEdit->toPlainText().toStdString();
 
-//copiar un texto
+//veces que se repite vocal
     size_t qq = miTexto.size();
-    char* copia = new char[qq + 1];
-    copia[qq] = '\0';
-
-    int i = 0;
-    while(i < qq) {
-
-        int j;
-        
-        if(i % 2 == 0) {
-            j = i;
-        }
-        std::cout << "La j es: " << j << "\n";
-
-        copia[i] = miTexto[i];
-        std::cout << "se esta copiando: " << i << "\n";
-        
-        // i = i + 1;
-        i++;
-    }
-
-
-//copiar con (for) un texto
-    std::cout << "El resultado es: " << copia << "\n";
-    delete[] copia;
-
-    char* copiaFor = new char[qq + 1];
-    copiaFor[qq] = '\0';
-
-    for(int i = 0; i < qq; i++) {
-
-        copiaFor[i] = miTexto[i];
-        std::cout << "se esta copiando: " << i << "\n";
-    }
-
-    std::cout << "El resultado es: " << copiaFor << "\n";
-    delete[] copiaFor;
-
-
-//veces que se repite la letra a
-    int vecesLetraA = 0;
+    int vecesVocal = 0;
 
     for(int i = qq - 1 ; i >= 0; i--) {
 
         char actual = miTexto[i];
-        if(actual == 'a' || actual == 'A') {
-            vecesLetraA++;
+        if(actual == 'a' || actual == 'A' 
+        || actual == 'e' || actual == 'E'
+        || actual == 'i' || actual == 'I'
+        || actual == 'o' || actual == 'O'
+        || actual == 'u' || actual == 'U') {
+            vecesVocal++;
         }
     }
 
-    std::cout << "Veces letra 'a': " << vecesLetraA << "\n";
+    std::cout << "Veces vocales: " << vecesVocal << "\n";
+
+
+//Si es un palindrome
+    size_t leng = miTexto.size();
+    char* sentence = new char (leng + 1);
+    sentence[leng] = '\0';
+    int size = leng - 1;
+
+    for(int i = leng-1; i >= 0; i--) { 
+
+        sentence[i] = miTexto[size -i];
+    }
+
+    if(sentence == miTexto) {
+        std::cout << "mensaje es un palindromo" << "\n";
+    }
+        else {
+            std::cout << "mensaje no es un palindromo" << "\n";
+            }
+    delete[] sentence;
+
+
+//Numero de palabras
+
+int numPalabras = 0;
+char espacio = ' '; 
+
+for(int i = qq - 1; i >= 0; i--) {
+    if (miTexto[i] != espacio) {
+        numPalabras++;
+    
+        while (i > 0 && miTexto[i - 1] != espacio) {
+            i--;
+        }
+    }
+}
+
+std::cout << "El numero de palabras es: " << numPalabras << "\n";
+
+
+
+//Cantidad de veces que aparece la palabra "hola" en el mensaje.
+
+    int hola = 0;
+
+    for(int i = 0; i < qq; i++) {
+
+        char h = miTexto[i];
+        char o = miTexto[i+1];
+        char l = miTexto[i+2];
+        char a = miTexto[i+3];
+
+
+        if((h == 'h' || h == 'H') &&
+        (o == 'o' || o == 'O') &&
+        (l == 'l' || l == 'L') &&
+        (a == 'a' || a == 'A')) {
+            hola++;
+        }
+    }
+
+    std::cout << "holas: " << hola << "\n";
+
+
+//Cantidad de numeros
+
+    int numbers = 0;
+
+    for(int i = qq - 1 ; i >= 0; i--) {
+
+        char actual = miTexto[i];
+        if(isdigit(actual)) {
+            numbers++;
+        }
+    }
+
+    std::cout << "Cantidad de numeros: " << numbers << "\n";
 
 
 
 
-//arrays
-    std::string misStrings[12];
-    misStrings[0] = "hola hola";
-
-    int misInts[15];
-    misInts[0] = 42;
-    misInts[1] = 45;
-
-    char miTexto2[10];
-
-    miTexto2[0] = miTexto[0];
-    miTexto2[1] = 'o';
 
 
-    miTexto[0]  = 'h';
-
-    std::cout << "mi nuevo texto es: " << miTexto2[0] << miTexto2[1] << misInts[0] << misInts[1] << misStrings[0] << '\n';
 
 
 
