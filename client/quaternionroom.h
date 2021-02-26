@@ -21,6 +21,7 @@
 
 #include <room.h>
 
+
 class QuaternionRoom: public Quotient::Room
 {
         Q_OBJECT

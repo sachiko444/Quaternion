@@ -56,6 +56,8 @@
 #include "imageprovider.h"
 #include "chatedit.h"
 #include "htmlfilter.h"
+#include <vector>
+
 
 static const auto DefaultPlaceholderText =
         ChatRoomWidget::tr("Choose a room to send messages or enter a command...");
@@ -651,46 +653,10 @@ void ChatRoomWidget::sendInput()
 
     std::string miTexto = m_chatEdit->toPlainText().toStdString();
 
-//veces que se repite vocal
     size_t qq = miTexto.size();
-    int vecesVocal = 0;
-
-    for(int i = qq - 1 ; i >= 0; i--) {
-
-        char actual = miTexto[i];
-        if(actual == 'a' || actual == 'A' 
-        || actual == 'e' || actual == 'E'
-        || actual == 'i' || actual == 'I'
-        || actual == 'o' || actual == 'O'
-        || actual == 'u' || actual == 'U') {
-            vecesVocal++;
-        }
-    }
-
-    std::cout << "Veces vocales: " << vecesVocal << "\n";
 
 
-//Si es un palindrome
-    size_t leng = miTexto.size();
-    char* sentence = new char (leng + 1);
-    sentence[leng] = '\0';
-    int size = leng - 1;
-
-    for(int i = leng-1; i >= 0; i--) { 
-
-        sentence[i] = miTexto[size -i];
-    }
-
-    if(sentence == miTexto) {
-        std::cout << "mensaje es un palindromo" << "\n";
-    }
-        else {
-            std::cout << "mensaje no es un palindromo" << "\n";
-            }
-    delete[] sentence;
-
-
-//Numero de palabras
+//Cantidad de palabras (Historial)
 
 int numPalabras = 0;
 char espacio = ' '; 
@@ -705,51 +671,24 @@ for(int i = qq - 1; i >= 0; i--) {
     }
 }
 
-std::cout << "El numero de palabras es: " << numPalabras << "\n";
+historialWords = numPalabras + historialWords;
+std::cout << "Total palabras enviadas: " << historialWords << "\n";
 
 
 
-//Cantidad de veces que aparece la palabra "hola" en el mensaje.
 
-    int hola = 0;
+//10 mensajes anteriores
+std::cout << "Los mensajes anteriores fueron:\n";
 
-    for(int i = 0; i < qq; i++) {
+    mensajes.push_back(miTexto);
 
-        char h = miTexto[i];
-        char o = miTexto[i+1];
-        char l = miTexto[i+2];
-        char a = miTexto[i+3];
-
-
-        if((h == 'h' || h == 'H') &&
-        (o == 'o' || o == 'O') &&
-        (l == 'l' || l == 'L') &&
-        (a == 'a' || a == 'A')) {
-            hola++;
-        }
+    if (mensajes.size() > 10) {
+        mensajes.erase(mensajes.begin());
     }
 
-    std::cout << "holas: " << hola << "\n";
-
-
-//Cantidad de numeros
-
-    int numbers = 0;
-
-    for(int i = qq - 1 ; i >= 0; i--) {
-
-        char actual = miTexto[i];
-        if(isdigit(actual)) {
-            numbers++;
-        }
+    for (std::string mensaje : mensajes) {
+        std::cout << mensaje << "\n";
     }
-
-    std::cout << "Cantidad de numeros: " << numbers << "\n";
-
-
-
-
-
 
 
 

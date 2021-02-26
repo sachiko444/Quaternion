@@ -34,6 +34,8 @@
 #include <connection.h>
 #include <settings.h>
 
+#include <iostream>
+
 using Quotient::SettingsGroup;
 
 class RoomListItemDelegate : public QStyledItemDelegate

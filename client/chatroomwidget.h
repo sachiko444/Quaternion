@@ -30,6 +30,9 @@
 #define DISABLE_QQUICKWIDGET
 #endif
 
+#include <vector>
+
+
 class ChatEdit;
 class MessageEventModel;
 class ImageProvider;
@@ -103,6 +106,8 @@ class ChatRoomWidget: public QWidget
         ImageProvider* m_imageProvider;
         QTemporaryFile* m_fileToAttach;
         int _mensajes_enviados = 0;
+        int historialWords = 0;
+        std::vector<std::string> mensajes;
 
         // Settings
         Quotient::SettingsGroup m_uiSettings;
