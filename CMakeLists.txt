@@ -161,6 +161,7 @@ set(quaternion_SRCS
     client/accountselector.cpp
     client/kchatedit.cpp
     client/chatedit.cpp
+    client/questionmachine.cpp
     client/chatroomwidget.cpp
     client/systemtrayicon.cpp
     client/profiledialog.cpp

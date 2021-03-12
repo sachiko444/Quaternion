@@ -22,6 +22,8 @@
 #include <user.h>
 #include <events/roommessageevent.h>
 #include <QtCore/QRegularExpression>
+#include "questionmachine.h"
+#include <iostream>
 
 using namespace Quotient;
 
@@ -108,6 +110,14 @@ void QuaternionRoom::onAddHistoricalTimelineEvents(rev_iter_t from)
 
 void QuaternionRoom::checkForHighlights(const Quotient::TimelineItem& ti)
 {
+    const RoomMessageEvent* message = ti.viewAs<RoomMessageEvent>();
+    if(message) {
+        std::string text = message->plainBody().toStdString();
+        std::cout << "The message is: " << text << "\n\n";
+        _questionmachine.procesar(text);
+    }
+
+
     auto localUserId = localUser()->id();
     if (ti->senderId() == localUserId)
         return;

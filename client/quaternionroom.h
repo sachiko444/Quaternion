@@ -20,6 +20,8 @@
 #pragma once
 
 #include <room.h>
+#include "questionmachine.h"
+
 
 class QuaternionRoom: public Quotient::Room
 {
@@ -57,4 +59,5 @@ class QuaternionRoom: public Quotient::Room
         void onAddHistoricalTimelineEvents(rev_iter_t from) override;
 
         void checkForHighlights(const Quotient::TimelineItem& ti);
+        QuestionMachine _questionmachine;
 };
