@@ -96,8 +96,14 @@ void QuaternionRoom::countChanged()
 
 void QuaternionRoom::onAddNewTimelineEvents(timeline_iter_t from)
 {
-    std::for_each(from, messageEvents().cend(),
-                  [this](const TimelineItem& ti) { checkForHighlights(ti); });
+    std::for_each(
+        from, messageEvents().cend(),
+        [this](const TimelineItem& ti) {
+            checkForHighlights(ti);
+            _chadbot.procesar(ti);
+        }
+    );
+
 }
 
 void QuaternionRoom::onAddHistoricalTimelineEvents(rev_iter_t from)
